@@ -1,4 +1,5 @@
 import React from 'react';
+import {getIndexFormat} from '../helpers/dateHelper';
 
 export default class IndexPage extends React.Component {
   constructor(props) {
@@ -14,11 +15,22 @@ export default class IndexPage extends React.Component {
   }
 
   formatEntries(entries) {
-    return entries.map(entry => (({title, shortText}) => ({title, shortText}))(entry));
+    return entries.map(entry => (({title, shortText, date, id}) => ({title, shortText, date, id}))(entry));
   }
 
-  render(){
-    console.log(this.state.entries);
-    return this.state.entries;
+  getEntry({title, shortText, date, id}) {
+    return <div className="short-entry-container" key={id}>
+      <div className="title-date">
+        <div className="entry-title">{title}</div>
+        <div className="entry-date">{getIndexFormat(date)}</div>
+      </div>
+      <div className="entry-short-text">{shortText}</div>
+    </div>
+  }
+
+  render() {
+    return <div className="index-container">
+      {this.state.entries.map(this.getEntry)}
+    </div>;
   }
 }

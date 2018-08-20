@@ -1,16 +1,18 @@
 import React from 'react';
-import Author from "./components/views/authorView";
 import SmallMultiEntryView from "./components/views/smallMultiEntryView";
 import InfiniteView from "./components/views/infiniteView";
 import IndexPage from "./components/views/indexPage";
 import Gallery from "./components/views/gallery/index";
 
 import EntryForm from './components/forms/entryForm';
+import WithAuthor from "./components/higherOrder/withAuthor";
 import WithColumns from "./components/higherOrder/withColumns";
 import WithEntries from "./components/higherOrder/withEntries";
 import EntryRepository from "./components/repositories/entryRepository";
 import {MuiThemeProvider} from "material-ui";
 import {BrowserRouter, Route} from "react-router-dom";
+
+import Navbar from './components/inputs/navbar';
 
 export default function App() {
 
@@ -34,16 +36,11 @@ export default function App() {
     </WithEntries>;
   };
 
-  const getAuthor = () => {
+  const getIndexPage = (props) => {
     scrollUp();
-    return <WithColumns>
-      <Author/>
-    </WithColumns>
-  };
-
-  const getIndexPage = () => {
-    scrollUp();
-    return <IndexPage entryRepository={entryRepository}/>;
+    return <WithAuthor pathname={props.location.pathname}>
+      <IndexPage entryRepository={entryRepository}/>)
+    </WithAuthor>;
   };
 
   const getEntryForm = () => {
@@ -63,7 +60,6 @@ export default function App() {
     <BrowserRouter>
       <div className="blog-inner-container">
         <Route exact path="/" component={getIndexPage}/>
-        <Route path="/author" component={getAuthor}/>
         <Route path="/small-list" component={getSmallMultiEntry}/>
         <Route exact path="/archive" component={getInfiniteView}/>
         <Route path="/entries/new" component={getEntryForm}/>
