@@ -1,0 +1,241 @@
+$beige: rgb(245, 243, 234);
+
+.alternate-view-container {
+  background-color: $beige;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  -webkit-font-smoothing: antialiased;
+
+  .home-link, .next-link {
+    font-weight: 700;
+    color: blue;
+    text-decoration: underline;
+    font-family: "IBM Plex Serif", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .right-page, .left-page {
+    width: 40%;
+    height: 100%;
+    //background-color: lightblue;
+
+    min-width: 580px;
+  }
+
+  .right-page {
+    .grid {
+      display: grid;
+      grid-row-gap: 1vh;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      width: 100%;
+      height: 100%;
+
+      .header {
+        background-color: black;
+        color: #f5f3ea !important;
+        grid-area: 1/4/4/7;
+        z-index: 5;
+        font-weight: 300;
+        line-height: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        text-transform: uppercase;
+        padding: 2vh 1vh;
+
+        .large {
+          font-size: 15vh;
+          font-family: "BenchNine";
+        }
+
+        .small, .pull-left {
+          font-size: 5vh;
+          font-family: "Catamaran";
+        }
+
+        .pull-left {
+          align-self: flex-end;
+        }
+      }
+
+      .ad, .vent, .ures {
+        font-size: 42vh;
+        line-height: 0;
+        font-family: "Impact";
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-top: 15vh;
+        color: rgb(220, 80, 37);
+        letter-spacing: -1.5vw;
+      }
+
+      .ad {grid-area: 1/1/1/5;}
+
+      .vent {grid-area: 3/1/3/7;}
+
+      .ures {grid-area: 5/1/5/7;}
+
+      .footer {
+        background-color: black;
+        color: #f5f3ea !important;
+        grid-area: 6/1/6/7;
+        z-index: 5;
+        font-weight: 300;
+        line-height: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        text-transform: uppercase;
+        padding: 2vh 1vh;
+        height: 50%;
+
+        .line1, .line2 {
+          font-size: 3.5vh;
+          font-family: "Catamaran";
+        }
+      }
+    }
+  }
+
+  .left-page {
+
+    .grid {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      grid-template-rows: 1fr 1fr 1fr 0.3fr 1.5fr 0.3fr 1fr 1fr 0.5fr 1fr 0.3fr 1fr 0.5fr 0.3fr 1fr 1fr;
+      grid-template-columns: 0.5fr 1fr 0.5fr 0.5fr 0.5fr 1fr 1fr 1fr 0.5fr 1fr 0.5fr 1fr 0.3fr;
+
+      b {
+        background-color: black;
+      }
+
+      b.one {grid-area: 1/1/17/1;}
+      b.two {grid-area: 1/3/1/11;}
+      b.three {grid-area: 2/3/2/7;}
+      b.four {grid-area: 3/3/3/5;}
+      b.five {grid-area: 1/13/17/13;}
+      b.six {grid-area: 1/12/4/12;}
+      b.seven {grid-area: 3/11/4/11;}
+      b.eight {grid-area: 4/8/4/10;}
+      b.nine {grid-area: 5/7/5/10;}
+      b.ten {grid-area: 6/7/6/13;}
+      b.eleven {grid-area: 7/9/7/13;}
+      b.twelve {grid-area: 8/12/8/13;}
+      b.thirteen {grid-area: 8/3/12/5;}
+      b.fourteen {grid-area: 10/3/12/7;}
+      b.fifteen {grid-area: 11/7/13/9;}
+      b.sixteen {grid-area: 13/7/14/8;}
+      b.seventeen {grid-area: 13/11/17/13;}
+      b.eighteen {grid-area: 16/7/17/13;}
+      b.nineteen {grid-area: 14/3/16/5;}
+      b.twenty {grid-area: 14/3/16/5;}
+
+      div {
+        color: #dc5025;
+        font-weight: bold;
+        font-size: 9vh;
+        line-height: 0.7 !important;
+        font-family: "Jomhuria";
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      div.one {
+        grid-area: 2/7/2/12;
+        line-height: 0.5 !important;
+        display: flex;
+        font-size: 12vh;
+        vertical-align: bottom;
+        justify-content: center;
+        padding-top: 3vh;
+      }
+
+      div.two {
+        grid-area: 3/5/3/11;
+        font-size: 11vh;
+      }
+
+      div.three {
+        grid-area: 5/3/7/7;
+        display: flex;
+        text-align: right;
+        padding-right: 0.5vw;
+        align-items: center;
+        font-size: 10vh;
+        line-height: 0.5 !important;
+      }
+
+      div.four{
+        padding-top: 1vh;
+        padding-right: 0.5vw;
+        grid-area: 7/2/8/9;
+        text-align: right;
+        font-size: 11.5vh;
+      }
+
+      div.five{
+        padding-right: 0.5vw;
+        grid-area: 8/5/10/12;
+        text-align: right;
+        line-height: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 0.5 !important;
+      }
+
+      div.six{
+        padding-right: 0.5vw;
+        grid-area: 10/7/11/17;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      div.seven {
+        padding-top: 1.5vh;
+        padding-right: 0.1vw;
+        grid-area: 11/9/13/13;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: right;
+        font-size: 10vh;
+        line-height: 0.5 !important;
+      }
+
+      div.eight {
+        text-align: center;
+        grid-area: 13/8/14/11;
+        margin-bottom: -2vh;
+      }
+
+      div.nine {
+        grid-area: 14/5/16/11;
+        font-size: 11vh;
+      }
+
+      .next-link {
+        grid-area: 5/10/5/13;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 3vh;
+      }
+
+      .home-link {
+        grid-area: 12/3/14/7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+    }
+  }
+}
