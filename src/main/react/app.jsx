@@ -39,7 +39,14 @@ export default function App() {
   const getIndexPage = (props) => {
     scrollUp();
     return <WithAuthor pathname={props.location.pathname}>
-      <IndexPage entryRepository={entryRepository}/>)
+      <IndexPage entryRepository={entryRepository} isDetailed={true}/>
+    </WithAuthor>;
+  };
+
+  const getArchivePage = (props) => {
+    scrollUp();
+    return <WithAuthor pathname={props.location.pathname}>
+      <IndexPage entryRepository={entryRepository} isDetailed={false}/>
     </WithAuthor>;
   };
 
@@ -60,8 +67,9 @@ export default function App() {
     <BrowserRouter>
       <div className="blog-inner-container">
         <Route exact path="/" component={getIndexPage}/>
+        <Route exact path="/archive" component={getArchivePage}/>
+
         <Route path="/small-list" component={getSmallMultiEntry}/>
-        <Route exact path="/archive" component={getInfiniteView}/>
         <Route path="/entries/new" component={getEntryForm}/>
         <Route path="/gallery/:id" component={getGallery}/>
       </div>
