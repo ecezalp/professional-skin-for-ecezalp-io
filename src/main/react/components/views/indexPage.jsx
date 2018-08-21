@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import {getIndexFormat} from '../helpers/dateHelper';
 
@@ -17,7 +18,13 @@ export default class IndexPage extends React.Component {
   }
 
   formatEntries(entries) {
-    return entries.map(entry => (({title, shortText, date, id}) => ({title, shortText, date, id}))(entry));
+    return entries.map(entry => (({title, shortText, date, id, friendlyUrl}) => ({
+      title,
+      shortText,
+      date,
+      id,
+      friendlyUrl
+    }))(entry));
   }
 
   getDetailedEntry({title, shortText, date, id}) {
@@ -30,11 +37,13 @@ export default class IndexPage extends React.Component {
     </div>
   }
 
-  getShortEntry({title, date, id}) {
-    return <div className="short-entry-container" key={id}>
-      <div className="entry-date">{getIndexFormat(date)}</div>
-      <div className="entry-title">{title}</div>
-    </div>;
+  getShortEntry({title, date, id, friendlyUrl}) {
+    return <Link to={`/archive/${friendlyUrl}`} key={id}>
+      <div className="short-entry-container">
+        <div className="entry-date">{getIndexFormat(date)}</div>
+        <div className="entry-title">{title}</div>
+      </div>
+    </Link>;
   }
 
   render() {

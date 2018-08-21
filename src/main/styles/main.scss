@@ -1,13 +1,19 @@
-@import "../../../node_modules/highlight.js/styles/gruvbox-dark.css";
+@import "../../../node_modules/highlight.js/styles/googlecode.css";
 //@import "../../../node_modules/highlight.js/styles/darcula.css";
 
 @import "author";
 @import "index";
 @import "navbar";
+@import "entry";
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
 
 @import "cube";
 @import "loading";
-@import "markdown";
+//@import "markdown";
 @import "ernstKeller";
 @import "louisRoeschCo";
 @import "tiles";

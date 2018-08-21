@@ -12,6 +12,18 @@ export default class EntryRepository {
     });
   }
 
+  findByFriendlyUrl(friendlyUrl) {
+    let ref = firebase.database().ref('entries');
+    return ref
+      .orderByChild('friendlyUrl')
+      .equalTo(friendlyUrl)
+      .once('value').then(function (snapshot) {
+        return snapshot.val()[Object.keys(snapshot.val())[0]]
+      }, function (error) {
+        console.error(error);
+      });
+  }
+
   create(entry) {
     let ref = firebase.database().ref('entries');
     ref.push(entry);

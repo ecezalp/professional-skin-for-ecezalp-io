@@ -1,0 +1,71 @@
+.entry-page-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: rgba(0,0,0,0.7);
+
+  .content {
+    width: 40%;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      padding-top: 20vh;
+      font-family: "Raleway", sans-serif;
+      font-size: 2rem;
+      text-align: center;
+      color: black;
+    }
+
+    .subtitle {
+      display: flex;
+      padding: 2vh 0;
+      width: 100%;
+      justify-content: center;
+      color: darkgray;
+
+      .filler {
+        padding: 0 5px;
+      }
+    }
+
+    .tags-container {
+      display: flex;
+      padding: 3vh 0;
+
+      .tag {
+        height: 2vh;
+        text-transform: uppercase;
+        color: blue;
+        font-size: 0.9rem;
+        padding: 0 10px;
+        cursor: pointer;
+      }
+    }
+
+    .text-container {
+      padding-top: 2vh;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      padding-bottom: 20vh;
+
+      pre {
+        white-space: pre-wrap; /* css-3 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        word-wrap: break-word; /* Internet Explorer 5.5+ */
+        -moz-tab-size: 2; /* Firefox */
+        tab-size: 2;
+        border: 1px solid #E4EBF2;
+      }
+
+      code {
+        font-size: 12px;
+        font-family: 'Menlo', Courier, monospace;
+      }
+    }
+  }
+}
