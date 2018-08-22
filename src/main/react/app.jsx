@@ -11,6 +11,7 @@ import WithAuthor from "./components/higherOrder/withAuthor";
 import EntryRepository from "./components/repositories/entryRepository";
 
 import {BrowserRouter, Route} from "react-router-dom";
+import AboutPage from "./components/views/aboutPage";
 
 export default function App() {
 
@@ -68,6 +69,16 @@ export default function App() {
       />
     </WithAuthor>;
   };
+
+  const getAboutPage = (props) => {
+    scrollUp();
+    return <WithAuthor
+      pathname={props.location.pathname}>
+      <AboutPage/>
+    </WithAuthor>;
+  };
+
+
   //
   // const getEntryForm = () => {
   //   scrollUp();
@@ -82,6 +93,7 @@ export default function App() {
   return <BrowserRouter>
     <div className="app-container">
       <Route exact path="/" component={getIndexPage}/>
+      <Route exact path="/about" component={getAboutPage}/>
       <Route exact path="/archive" component={getArchivePage}/>
       <Route path="/archive/:friendlyUrl" component={getEntryPage}/>
       <Route exact path="/tags" component={getTagsPage}/>
