@@ -9,10 +9,10 @@
   .entry-date {
     white-space: nowrap;
     padding-right: 2vw;
-    color: lightgray;
+    color: gray;
     font-family: "Raleway", sans-serif;
     align-self: right;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .detailed-entry-container {
@@ -27,7 +27,8 @@
 
     .entry-title {
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      color: black;
     }
 
     .entry-short-text {
@@ -39,7 +40,8 @@
     cursor: pointer;
 
     .entry-title {
-      color: blue;
+      color: $link_color;
+      text-decoration: underline;
     }
   }
 
@@ -54,6 +56,15 @@
       color: gray;
       width: 30px;
       font-size: 0.9rem;
+    }
+
+    .entry-title {
+      color: black;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   }
 

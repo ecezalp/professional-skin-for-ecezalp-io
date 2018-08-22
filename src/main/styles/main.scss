@@ -1,19 +1,24 @@
 @import "../../../node_modules/highlight.js/styles/googlecode.css";
 //@import "../../../node_modules/highlight.js/styles/darcula.css";
 
+$link_color: blue;
+
 @import "author";
 @import "index";
 @import "navbar";
 @import "entry";
+@import "tags";
 
 body {
   font-family: "Nunito Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+a {
+  text-decoration: none;
+}
+
 @import "cube";
-@import "loading";
-//@import "markdown";
 @import "ernstKeller";
 @import "louisRoeschCo";
 @import "tiles";

@@ -14,7 +14,22 @@ export default class IndexPage extends React.Component {
 
   componentDidMount() {
     this.props.entryRepository.findAll()
-      .then(response => this.setState({entries: this.formatEntries(response)}));
+      .then(response => this.setState({entries: this.formatEntries(this.filterEntries(response))}));
+  }
+
+  filterEntries(entries) {
+    return this.props.tag ?
+      entries
+        .filter(entry =>
+          entry.tags &&
+          entry.tags
+            .toLowerCase()
+            .replace(" ", "-")
+            .split(",")
+            .includes(
+              this.props.tag
+                .toLowerCase())) :
+      entries;
   }
 
   formatEntries(entries) {
@@ -27,13 +42,15 @@ export default class IndexPage extends React.Component {
     }))(entry));
   }
 
-  getDetailedEntry({title, shortText, date, id}) {
+  getDetailedEntry({title, shortText, date, id, friendlyUrl}) {
     return <div className="detailed-entry-container" key={id}>
-      <div className="title-date">
-        <div className="entry-title">{title}</div>
-        <div className="entry-date">{getIndexFormat(date)}</div>
-      </div>
-      <div className="entry-short-text">{shortText}</div>
+      <Link to={`/archive/${friendlyUrl}`}>
+        <div className="title-date">
+          <div className="entry-title">{title}</div>
+          <div className="entry-date">{getIndexFormat(date)}</div>
+        </div>
+        <div className="entry-short-text">{shortText}</div>
+      </Link>
     </div>
   }
 
@@ -57,6 +74,7 @@ export default class IndexPage extends React.Component {
 }
 
 IndexPage.propTypes = {
-  entryRepository: PropTypes.object,
+  entryRepository: PropTypes.object.isRequired,
   isDetailed: PropTypes.bool,
+  tag: PropTypes.string,
 };

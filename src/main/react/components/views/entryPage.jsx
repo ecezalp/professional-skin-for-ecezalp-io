@@ -25,8 +25,9 @@ export default class EntryPage extends React.Component {
   componentDidMount() {
     this.props.entryRepository.findByFriendlyUrl(this.props.friendlyUrl)
       .then(response => {
-        setTimeout(() => this.highlightCode(), 50);
-        this.setState({entry: response})
+        this.setState({entry: response});
+        !response.isLinkDump && this.highlightCode();
+        this.setLinkTargetsToBlank();
       });
   }
 
@@ -51,7 +52,13 @@ export default class EntryPage extends React.Component {
 
   getTags(tags) {
     return <div className="tags-container">
-      {tags.split(",").map(tag => <div className="tag">{tag}</div>)}
+      {tags.split(",").map(tag =>
+        <Link
+          className="tag"
+          to={`/tags/${tag.replace(' ', '-').toLowerCase()}`}>
+          {tag}
+        </Link>
+      )}
     </div>;
   }
 
@@ -64,11 +71,20 @@ export default class EntryPage extends React.Component {
   }
 
   highlightCode() {
-    const nodes = document.querySelectorAll('pre code');
+    this.modifyDOM('pre code', (node) => hljs.highlightBlock(node));
+  }
 
-    for (let i = 0; i < nodes.length; i++) {
-      hljs.highlightBlock(nodes[i])
-    }
+  setLinkTargetsToBlank() {
+    this.modifyDOM('a', (node) => node.setAttribute("target", "_blank"));
+  }
+
+  modifyDOM(selector, callback) {
+    setTimeout(() => {
+      const nodes = document.querySelectorAll(selector);
+      for (let i = 0; i < nodes.length; i++) {
+        callback(nodes[i]);
+      }
+    }, 50);
   }
 
   render() {

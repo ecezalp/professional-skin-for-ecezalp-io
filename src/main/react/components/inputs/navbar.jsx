@@ -27,7 +27,9 @@ export default function Navbar({pathname}) {
     text: "← Home",
   });
 
-  return <div className="navbar">
-    {links.map(({to, text}, index) => <Link key={`navbar-${index}`}to={to}>{text}</Link>)}
+  return <div className="navbar-container">
+    <div className="navbar">
+      {links.map(({to, text}, index) => <Link key={`navbar-${index}`} to={to}>{text}</Link>)}
+    </div>
   </div>
 }

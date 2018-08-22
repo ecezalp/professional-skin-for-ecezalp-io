@@ -1,0 +1,42 @@
+.tags-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    padding: 0;
+  }
+
+  .tags {
+    width: 40%;
+    text-align: center;
+
+    .tag {
+      .name {
+        height: 2vh;
+        text-transform: uppercase;
+        color: $link_color;
+        font-size: 0.9rem;
+        padding: 0 4px;
+        cursor: pointer;
+      }
+
+      .name:hover {
+        text-decoration: underline;
+        color: $link_color;
+      }
+    }
+
+    li {
+      margin: 10px 15px;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    a {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 0.9rem;
+    }
+  }
+}
