@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-import {TextField} from "material-ui";
-import {blue600, orange600} from 'material-ui/styles/colors';
 import {ChromePicker} from 'react-color';
 import PropTypes from 'prop-types';
 
 import formPassword from "../../../secrets/password";
+import Navbar from "../inputs/navbar";
 
-export default class EntryForm extends React.Component {
+export default class EntryForm extends Component {
 
   constructor(props) {
     super(props);
@@ -23,74 +22,51 @@ export default class EntryForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
-   let entry = this.state.entry;
-   let id = this.getNextId(newProps.entries);
-   entry["id"] = id;
-   this.setState(entry);
+  componentDidMount() {
+    this.props.entryRepository.getNextId()
+      .then(response => {
+        let entry = this.state.entry;
+        entry["id"] = response;
+        console.log(entry);
+        this.setState({entry});
+      })
   }
 
-  getNextId(entries = this.props.entries) {
-    let currentId = entries.reduce((acc, entry) => {
-      if (entry.id > acc) {
-        acc = entry.id;
-      }
-      return acc;
-    }, 0);
-    return currentId + 1;
-  }
-
-  getTextFieldStyles() {
-    return {
-      colorBlue: {
-        color: blue600,
-      },
-      borderColorBlue: {
-        borderColor: blue600,
-      },
-      colorOrange: {
-        color: orange600,
-      },
-      borderColorOrange: {
-        borderColor: orange600,
-      },
-    };
-  }
-
-  getPasswordField(styles) {
-    return <div className="tags-container eio-field">
-      <TextField fullWidth={true}
-                 onChange={(e) => this.setState({password: e.target.value})}
-                 floatingLabelText={"Password"}
-                 value={this.state.password}
-                 floatingLabelStyle={styles.colorOrange}
-                 underlineFocusStyle={styles.borderColorOrange}
-                 underlineStyle={styles.colorOrange}/>
+  getTitle(title) {
+    return <div className={'form-title'}>
+      {title}
     </div>
   }
 
-  getTextField(title, field, styles) {
-    return <div className="tags-container eio-field">
-      <TextField hintText={title}
-                 onChange={(e) => this.handleEntryChange(field, e.target.value)}
-                 floatingLabelText={title}
-                 value={this.state.entry[field]}
-                 errorStyle={styles.errorStyle}
-                 fullWidth={true}
-                 underlineFocusStyle={styles.borderColorBlue}
-                 underlineStyle={styles.borderColorBlue}
-                 floatingLabelStyle={styles.colorBlue}/>
+  getTextField(title, field) {
+    return <div className="text-field-container">
+      {this.getTitle(title)}
+      <input
+        className={"field"}
+        onChange={(e) => this.handleEntryChange(field, e.target.value)}
+        value={this.state.entry[field]}
+      />
     </div>
   }
 
   getTextArea(title, field) {
-    return <div className="text-container eio-field">
-      <div className='text-area-container'>
+    return <div className="text-field-container">
         {this.getTitle(title)}
-        <textarea value={this.state.entry[field]}
-                  onChange={(e) => this.handleEntryChange(field, e.target.value)}>
-        </textarea>
-      </div>
+        <textarea
+          className={field.toLowerCase()}
+          value={this.state.entry[field]}
+          onChange={(e) => this.handleEntryChange(field, e.target.value)}
+        />
+    </div>;
+  }
+
+  getPasswordField() {
+    return <div className="tags-container eio-field">
+      <input
+        className={"password"}
+        onChange={(e) => this.setState({password: e.target.value})}
+        value={this.state.password}
+      />
     </div>;
   }
 
@@ -101,18 +77,12 @@ export default class EntryForm extends React.Component {
     return <div className="islinkdump-container eio-field">
       <div className={'checkbox-container'}>
         {this.getTitle(title)}
-        <div className={checkboxClassName}
-             onClick={() => this.handleEntryChange("isLinkDump", isLinkDump)}>
-          {!isLinkDump && <i className="material-icons">check_box</i>}
+        <div
+          className={checkboxClassName}
+          onClick={() => this.handleEntryChange("isLinkDump", isLinkDump)}>
         </div>
       </div>
     </div>;
-  }
-
-  getTitle(title) {
-    return <div className={'text-area-title'}>
-      {title}
-    </div>
   }
 
   handleEntryChange(field, value) {
@@ -126,10 +96,12 @@ export default class EntryForm extends React.Component {
   }
 
   getColorSquare(hex, index) {
-    return <div key={`hex-${index}`}
-                className="hex-square"
-                style={{backgroundColor: hex}}
-                onClick={() => this.colorSquareClickHandler(index)}/>;
+    return <div
+      key={`hex-${index}`}
+      className="hex-square"
+      style={{backgroundColor: hex}}
+      onClick={() => this.colorSquareClickHandler(index)}
+    />;
   }
 
   getColorsContainer() {
@@ -141,10 +113,13 @@ export default class EntryForm extends React.Component {
 
   getColorPicker() {
     return <div className="color-picker-container eio-field">
-      {this.state.activeColorIndex > -1 && <div>
-        <i className="material-icons" onClick={this.closeColorPicker}>close</i>
-        <ChromePicker color={this.state.entry.colors[this.state.activeColorIndex]}
-                      onChangeComplete={(color, event) => this.handleColorChange(color, event)}/>
+      {this.state.activeColorIndex > -1 &&
+      <div>
+        <div onClick={this.closeColorPicker}>x</div>
+        <ChromePicker
+          color={this.state.entry.colors[this.state.activeColorIndex]}
+          onChangeComplete={(color, event) => this.handleColorChange(color, event)}
+        />
       </div>}
     </div>
   }
@@ -162,7 +137,12 @@ export default class EntryForm extends React.Component {
   getSubmitButton() {
     if (this.state.password === formPassword) {
       return <div className="submit-button">
-        <i className="material-icons" onClick={this.handleSubmit}>send</i>
+        <div
+          className="submit"
+          onClick={this.handleSubmit}
+        >
+          SUBMIT
+        </div>
       </div>
     }
   }
@@ -174,7 +154,7 @@ export default class EntryForm extends React.Component {
 
   getEmptyEntry() {
     return Object.assign({}, {
-      id: this.getNextId(),
+      id: "",
       title: "",
       shortText: "",
       tags: [],
@@ -184,24 +164,37 @@ export default class EntryForm extends React.Component {
     });
   }
 
-  render() {
-    let textFieldStyles = this.getTextFieldStyles();
+  getNavbar() {
+    return <Navbar pathname={this.props.pathname}/>;
+  }
 
+  getExplanation() {
+    return <div className="explanation">
+      This website is a CMS that I wrote myself, and this little area is where I make my posts. You will not be able to
+      make a post without entering the password, but you can play around!
+    </div>
+  }
+
+  render() {
     return <div className="form-container">
-      {this.getTextField("Title", "title", textFieldStyles)}
-      {this.getTextField("Tags", "tags", textFieldStyles)}
-      {this.getTextArea("Text", "text")}
-      {this.getTextArea("Short Text", "shortText")}
-      {this.getCheckbox("Link Dump")}
-      {this.getColorsContainer()}
-      {this.getColorPicker()}
-      {this.getPasswordField(textFieldStyles)}
-      {this.getSubmitButton()}
+      {this.getNavbar()}
+      {this.getExplanation()}
+      <div className="form">
+        {this.getTextField("Title", "title")}
+        {this.getTextField("Tags", "tags")}
+        {this.getTextArea("Short Text", "shortText")}
+        {this.getTextArea("Text", "text")}
+        {this.getCheckbox("Link Dump")}
+        {this.getColorsContainer()}
+        {this.getColorPicker()}
+        {this.getPasswordField()}
+        {this.getSubmitButton()}
+      </div>
     </div>
   };
 }
 
 EntryForm.propTypes = {
   entryRepository: PropTypes.object,
-  id: PropTypes.number,
+  pathname: PropTypes.string,
 };

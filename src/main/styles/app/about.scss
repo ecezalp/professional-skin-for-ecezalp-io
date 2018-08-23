@@ -6,6 +6,10 @@
   .about {
     width: 40%;
 
+    h3 {
+      text-transform: uppercase;
+    }
+
     a {
       color: $link_color;
       text-decoration: none;

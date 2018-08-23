@@ -6,6 +6,23 @@
   line-height: 1.5;
   padding-bottom: 25vh;
 
+  .tags-container {
+    display: flex;
+
+    .tag {
+      height: 2vh;
+      text-transform: uppercase;
+      color: $link_color;
+      font-size: 0.9rem;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .tag:hover{
+      text-decoration: underline;
+    }
+  }
+
   .entry-date {
     white-space: nowrap;
     padding-right: 2vw;

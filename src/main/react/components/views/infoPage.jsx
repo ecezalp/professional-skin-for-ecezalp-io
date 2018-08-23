@@ -1,9 +1,10 @@
 import React, {Fragment} from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function AboutPage() {
+export default function InfoPage({pathname}) {
 
-  const aboutText = [
+  const about = [
     <div>Hello there! This is Ece. My name is pronounced like edge-a. I also go by AJ due to the phonetic similarity.</div>,
     <div>My passions include test driven development, pair programming, and fullstack web development. You can find my <Link
       to="/resume">résumé</Link> here.</div>,
@@ -12,9 +13,25 @@ export default function AboutPage() {
     <div>Other than coding, I enjoy reading, learning, and web design.</div>
   ];
 
+  const resume = [
+    <h3>Education</h3>,
+    <span><div className="school">The New School</div><div className="date">2014 - 2016</div></span>,
+    <span><div className="school">Duke University</div><div className="date">2008 - 2012</div></span>,
+    <h3>Work Experience</h3>,
+    <span><div className="school">The New School</div><div className="date">2014 - 2016</div></span>,
+    <span><div className="school">Duke University</div><div className="date">2008 - 2012</div></span>,
+  ];
+
+  const renderText = textArray =>
+    textArray.map((item, index) => <Fragment key={`about-${index}`}>{item}<br/></Fragment>);
+
   return <div className="about-container">
     <div className="about">
-      {aboutText.map((item, index) => <Fragment key={`about-${index}`}>{item}<br/></Fragment>)}
+      {renderText(pathname === "/about" ? about : resume)}
     </div>
   </div>;
 }
+
+InfoPage.propTypes = {
+  pathname: PropTypes.string,
+};

@@ -20,6 +20,10 @@ export default function Navbar({pathname}) {
       to: "/gallery/1",
       text: "Gallery",
     },
+    {
+      to: "/form",
+      text: "Form",
+    },
   ];
 
   if (pathname !== "/") links.unshift({

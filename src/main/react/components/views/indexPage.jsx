@@ -63,10 +63,19 @@ export default class IndexPage extends React.Component {
     </Link>;
   }
 
+  getTag(tag) {
+    return <div className="tags-container">
+        <Link className="tag" to={`/tags/${tag}`}>
+          {tag.replace("-", " ")}
+        </Link>
+    </div>;
+  }
+
   render() {
-    const {isDetailed} = this.props;
+    const {isDetailed, tag} = this.props;
 
     return <div className="index-container">
+      {tag && this.getTag(tag)}
       {!isDetailed && <div className="short-entry-container year">2018</div>}
       {this.state.entries.map(isDetailed ? this.getDetailedEntry : this.getShortEntry)}
     </div>;

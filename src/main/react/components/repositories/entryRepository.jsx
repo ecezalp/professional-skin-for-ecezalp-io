@@ -12,13 +12,25 @@ export default class EntryRepository {
     });
   }
 
+  getNextId() {
+    let ref = firebase.database().ref('entries');
+    return ref
+      .orderByChild('id')
+      .limitToLast(1)
+      .once('value').then(function (snapshot) {
+        if (snapshot.val()) return snapshot.val()[Object.keys(snapshot.val())[0]].id + 1
+      }, function (error) {
+        console.error(error);
+      });
+  }
+
   findByFriendlyUrl(friendlyUrl) {
     let ref = firebase.database().ref('entries');
     return ref
       .orderByChild('friendlyUrl')
       .equalTo(friendlyUrl)
       .once('value').then(function (snapshot) {
-        return snapshot.val()[Object.keys(snapshot.val())[0]]
+        if (snapshot.val()) return snapshot.val()[Object.keys(snapshot.val())[0]]
       }, function (error) {
         console.error(error);
       });

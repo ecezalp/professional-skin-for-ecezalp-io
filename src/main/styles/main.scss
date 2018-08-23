@@ -3,12 +3,13 @@
 
 $link_color: blue;
 
-@import "about";
-@import "author";
-@import "index";
-@import "navbar";
-@import "entry";
-@import "tags";
+@import "app/about";
+@import "app/form";
+@import "app/author";
+@import "app/index";
+@import "app/navbar";
+@import "app/entry";
+@import "app/tags";
 
 body {
   font-family: "Nunito Sans", sans-serif;
@@ -19,7 +20,7 @@ a {
   text-decoration: none;
 }
 
-@import "cube";
-@import "ernstKeller";
-@import "louisRoeschCo";
-@import "tiles";
+//@import "rand/cube";
+//@import "rand/ernstKeller";
+//@import "rand/louisRoeschCo";
+//@import "rand/tiles";
