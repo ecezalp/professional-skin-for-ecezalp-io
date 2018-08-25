@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 20vh;
 
   .explanation {
     width: 40%;
@@ -30,34 +31,38 @@
         padding: 2px 0;
       }
 
-      input {
+      input, textarea {
         width: 100%;
         font-family: "Nunito Sans", sans-serif;
-        font-size: 1.1rem;
         border: 1px solid lightgray;
         color: black;
       }
 
-      textarea {
-        width: 100%;
-        font-family: "Nunito Sans", sans-serif;
-        font-size: 0.9rem;
-        border: 1px solid lightgray;
-        color: black;
-      }
+      input {font-size: 1.1rem;}
+
+      textarea {font-size: 0.9rem;}
 
       textarea:focus, input:focus {
         outline: none;
         border: 1px solid lightblue;
       }
 
-      textarea.shorttext {
-        height: 100px;
-      }
+      textarea.shorttext {height: 100px;}
 
-      textarea.text {
-        height: 300px;
+      textarea.text {height: 300px;}
+
+      .checkbox-container {
+        display: flex;
+        align-items: baseline;
+
+        .form-title {
+          min-width: 80px;
+        }
       }
+    }
+
+    .submit-button {
+      padding: 5vh 0;
     }
   }
 }

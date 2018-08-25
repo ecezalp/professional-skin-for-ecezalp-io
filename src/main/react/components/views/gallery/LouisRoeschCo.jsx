@@ -40,20 +40,17 @@ export default class LouisRoesch extends React.Component {
       <Link className="home-link link" to="/">home</Link>
       <div className="links">
         <Link className="link" to="/gallery/1">back</Link>
-        <Link className="link" to="/gallery/3">next</Link>
+        <Link className="next-link link" to="/gallery/3">next</Link>
       </div>
     </React.Fragment>
   }
 
   getTitle() {
-    return <div className="title">
-      <div className="link" onClick={() => this.setState({activeColorSchemeIndex: 0})}>1</div>
-      <div className="link" onClick={() => this.setState({activeColorSchemeIndex: 1})}>2</div>
-      <div className="link" onClick={() => this.setState({activeColorSchemeIndex: 2})}>3</div>
-      <div className="link" onClick={() => this.setState({activeColorSchemeIndex: 3})}>4</div>
-      <div className="link" onClick={() => this.setState({activeColorSchemeIndex: 4})}>5</div>
-      <div className="link" onClick={() => this.setState({activeColorSchemeIndex: 5})}>6</div>
-    </div>
+    let links =  Array.apply(null, {length: 6})
+      .map((nothing, index) =>
+        <div className="link" onClick={() => this.setState({activeColorSchemeIndex: index})}>{index + 1}</div>
+      );
+    return <div className="title">{links}</div>
   }
 
   render() {

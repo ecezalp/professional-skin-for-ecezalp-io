@@ -26,7 +26,7 @@ export default class EntryPage extends React.Component {
     this.props.entryRepository.findByFriendlyUrl(this.props.friendlyUrl)
       .then(response => {
         this.setState({entry: response});
-        !response.isLinkDump && this.highlightCode();
+        this.highlightCode();
         this.setLinkTargetsToBlank();
       });
   }
@@ -71,7 +71,7 @@ export default class EntryPage extends React.Component {
   }
 
   highlightCode() {
-    this.modifyDOM('pre code', (node) => hljs.highlightBlock(node));
+    this.modifyDOM('pre code', hljs.highlightBlock);
   }
 
   setLinkTargetsToBlank() {
@@ -81,10 +81,11 @@ export default class EntryPage extends React.Component {
   modifyDOM(selector, callback) {
     setTimeout(() => {
       const nodes = document.querySelectorAll(selector);
+      console.log(nodes);
       for (let i = 0; i < nodes.length; i++) {
         callback(nodes[i]);
       }
-    }, 50);
+    }, 300);
   }
 
   render() {

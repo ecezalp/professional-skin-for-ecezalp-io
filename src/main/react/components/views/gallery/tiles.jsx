@@ -12,6 +12,7 @@ import prettyFangs from '../../../../resources/tiles/pretty-fangs.png';
 import rayGun from '../../../../resources/tiles/ray-gun.png';
 import ringedPlanet from '../../../../resources/tiles/ringed-planet.png';
 import unicorn from '../../../../resources/tiles/unicorn.png';
+import space from '../../../../styles/rand/space.jpg';
 
 
 export default class Tiles extends React.Component {

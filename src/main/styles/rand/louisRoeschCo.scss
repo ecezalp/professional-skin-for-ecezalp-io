@@ -1,14 +1,4 @@
 
-//$background_color: rgb(150, 170, 102);
-//$dark_green: rgb(44, 51, 32);
-//$yellow: rgb(239, 229, 78);
-//$blue: rgb(79, 111, 123);
-//$purple: rgb(113, 57, 72);
-//$orange: rgb(205, 88, 41);
-//$red: rgb(189, 42, 24);
-//$dark_red: rgb(139, 41, 27);
-//$brown: rgb(111, 72, 54);
-
 .roesch-container {
   height: 100%;
   width: 100%;
@@ -145,10 +135,19 @@
     font-weight: 700;
     color: blue;
     text-decoration: underline;
-    font-family: "IBM Plex Serif", Helvetica, Arial, sans-serif;
-    padding: 0 1vw;
+    font-family: "Nunito Sans", sans-serif;
+    padding-bottom: 10px;
     -webkit-font-smoothing: antialiased;
     cursor: pointer;
+    font-size: 16px;
+  }
+
+  .home-link {
+    text-align: center;
+  }
+
+  .next-link {
+    padding-left: 10px;
   }
 
 }

@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 
-import {ChromePicker} from 'react-color';
 import PropTypes from 'prop-types';
-
-import formPassword from "../../../secrets/password";
 import Navbar from "../inputs/navbar";
+import formPassword from "../../../secrets/password";
 
 export default class EntryForm extends Component {
 
@@ -12,13 +10,9 @@ export default class EntryForm extends Component {
     super(props);
     this.state = {
       entry: this.getEmptyEntry(),
-      isColorPickerVisible: false,
-      activeColorIndex: -1,
       password: "",
     };
 
-    this.colorSquareClickHandler = this.colorSquareClickHandler.bind(this);
-    this.closeColorPicker = this.closeColorPicker.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -27,7 +21,6 @@ export default class EntryForm extends Component {
       .then(response => {
         let entry = this.state.entry;
         entry["id"] = response;
-        console.log(entry);
         this.setState({entry});
       })
   }
@@ -51,36 +44,24 @@ export default class EntryForm extends Component {
 
   getTextArea(title, field) {
     return <div className="text-field-container">
-        {this.getTitle(title)}
-        <textarea
-          className={field.toLowerCase()}
-          value={this.state.entry[field]}
-          onChange={(e) => this.handleEntryChange(field, e.target.value)}
-        />
-    </div>;
-  }
-
-  getPasswordField() {
-    return <div className="tags-container eio-field">
-      <input
-        className={"password"}
-        onChange={(e) => this.setState({password: e.target.value})}
-        value={this.state.password}
+      {this.getTitle(title)}
+      <textarea
+        className={field.toLowerCase()}
+        value={this.state.entry[field]}
+        onChange={(e) => this.handleEntryChange(field, e.target.value)}
       />
     </div>;
   }
 
-  getCheckbox(title) {
-    let isLinkDump = !this.state.entry.isLinkDump;
-    let checkboxClassName = `hex-square check is-${isLinkDump ? 'checked' : 'not-checked'}`;
-
-    return <div className="islinkdump-container eio-field">
-      <div className={'checkbox-container'}>
+  getCheckbox(title, checked) {
+    return <div className="text-field-container">
+      <div className="checkbox-container">
         {this.getTitle(title)}
-        <div
-          className={checkboxClassName}
-          onClick={() => this.handleEntryChange("isLinkDump", isLinkDump)}>
-        </div>
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={() => this.handleEntryChange("isLinkDump", checked)}
+        />
       </div>
     </div>;
   }
@@ -91,65 +72,33 @@ export default class EntryForm extends Component {
     this.setState({entry});
   }
 
-  colorSquareClickHandler(index) {
-    this.setState({isColorPickerVisible: true, activeColorIndex: index});
-  }
-
-  getColorSquare(hex, index) {
-    return <div
-      key={`hex-${index}`}
-      className="hex-square"
-      style={{backgroundColor: hex}}
-      onClick={() => this.colorSquareClickHandler(index)}
-    />;
-  }
-
-  getColorsContainer() {
-    return <div className="colors-container eio-field">
-      {this.getTitle("Colors")}
-      {this.state.entry.colors.map((color, index) => this.getColorSquare(color, index))}
-    </div>
-  }
-
-  getColorPicker() {
-    return <div className="color-picker-container eio-field">
-      {this.state.activeColorIndex > -1 &&
-      <div>
-        <div onClick={this.closeColorPicker}>x</div>
-        <ChromePicker
-          color={this.state.entry.colors[this.state.activeColorIndex]}
-          onChangeComplete={(color, event) => this.handleColorChange(color, event)}
-        />
-      </div>}
-    </div>
-  }
-
-  closeColorPicker() {
-    this.setState({activeColorIndex: -1})
-  }
-
-  handleColorChange(color) {
-    let entry = this.state.entry;
-    entry.colors[this.state.activeColorIndex] = color.hex;
-    this.setState({entry})
+  getPasswordField() {
+    return <div className="text-field-container">
+      {this.getTitle("Password")}
+      <input
+        type="password"
+        className={"password"}
+        onChange={e => this.setState({password: e.target.value})}
+        value={this.state.password}
+      />
+    </div>;
   }
 
   getSubmitButton() {
-    if (this.state.password === formPassword) {
-      return <div className="submit-button">
-        <div
-          className="submit"
-          onClick={this.handleSubmit}
-        >
-          SUBMIT
-        </div>
-      </div>
-    }
+    const button = <div className="submit-button">
+      <input
+        type="submit"
+        value="Submit"
+        onClick={this.handleSubmit}/>
+    </div>;
+
+    return this.state.password === formPassword && button;
   }
 
   handleSubmit() {
     this.props.entryRepository.create(this.state.entry);
-    this.setState({entry: this.getEmptyEntry(), password: ""})
+    this.setState({entry: this.getEmptyEntry(), password: ""});
+    window.location.replace("/");
   }
 
   getEmptyEntry() {
@@ -161,6 +110,8 @@ export default class EntryForm extends Component {
       text: "",
       isLinkDump: false,
       colors: ["", "", "", "", "", "", ""],
+      friendlyUrl: "",
+      date: "",
     });
   }
 
@@ -182,11 +133,11 @@ export default class EntryForm extends Component {
       <div className="form">
         {this.getTextField("Title", "title")}
         {this.getTextField("Tags", "tags")}
+        {this.getTextField("Friendly URL", "friendlyUrl")}
         {this.getTextArea("Short Text", "shortText")}
         {this.getTextArea("Text", "text")}
-        {this.getCheckbox("Link Dump")}
-        {this.getColorsContainer()}
-        {this.getColorPicker()}
+        {this.getTextField("Date", "date")}
+        {this.getCheckbox("Link Dump", !this.state.entry.isLinkDump)}
         {this.getPasswordField()}
         {this.getSubmitButton()}
       </div>

@@ -18,7 +18,7 @@ export default class TagsPage extends React.Component {
 
   getTagsFromEntries(entries) {
     return entries.reduce((acc, el) => {
-      el.tags && el.tags.split(",").forEach(tag => {
+      el.tags && el.tags.toLowerCase().split(",").forEach(tag => {
         acc[tag] = acc[tag] ? acc[tag] + 1 : 1;
       });
       return acc;

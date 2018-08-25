@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("../../resources/tiles/space.jpg");
+  background-image: url("./rand/space.jpg");
   background-size: cover;
 }
 
@@ -44,14 +44,15 @@
   padding-left: 10vw;
 
   .home-link, .next-link, .link {
-    font-weight: 700;
-    color: white;
+    border: 1px solid yellow;
+    color: blue;
+    background-color: black;
     text-decoration: underline;
     font-family: "IBM Plex Serif", Helvetica, Arial, sans-serif;
-    padding: 0 1vw;
+    padding: 10px;
+    margin: 5px;
     -webkit-font-smoothing: antialiased;
     cursor: pointer;
-    font-size: 3rem;
   }
 }
 
