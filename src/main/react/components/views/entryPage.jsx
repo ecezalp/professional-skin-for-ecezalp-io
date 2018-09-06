@@ -23,9 +23,11 @@ export default class EntryPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.entryRepository.findByFriendlyUrl(this.props.friendlyUrl)
-      .then(response => {
-        this.setState({entry: response});
+    const {entryRepository, friendlyUrl} = this.props;
+
+    entryRepository.findByFriendlyUrl(friendlyUrl)
+      .then(entry => {
+        this.setState({entry});
         this.highlightCode();
         this.setLinkTargetsToBlank();
       });
@@ -75,13 +77,12 @@ export default class EntryPage extends React.Component {
   }
 
   setLinkTargetsToBlank() {
-    this.modifyDOM('a', (node) => node.setAttribute("target", "_blank"));
+    this.modifyDOM('a', node => node.setAttribute("target", "_blank"));
   }
 
   modifyDOM(selector, callback) {
     setTimeout(() => {
       const nodes = document.querySelectorAll(selector);
-      console.log(nodes);
       for (let i = 0; i < nodes.length; i++) {
         callback(nodes[i]);
       }

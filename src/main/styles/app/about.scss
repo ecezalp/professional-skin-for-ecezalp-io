@@ -6,8 +6,93 @@
   .about {
     width: 40%;
 
+    a {
+      color: $link_color;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .resume {
+    width: 40%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
     h3 {
       text-transform: uppercase;
+    }
+
+    .job {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 50px;
+
+      .job-title {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 0.9rem;
+        padding: 5px;
+        display: flex;
+
+        .place {
+          padding-left: 10px;
+          color: plum;
+        }
+      }
+
+      .job-date {
+        color: rgba(0, 0, 0, 0.55);
+        padding: 5px;
+      }
+
+      .job-info {
+        width: 85%;
+      }
+    }
+
+    .skill-container {
+      padding-bottom: 30px;
+      width: 85%;
+      display: flex;
+
+      ul {
+        padding: 0;
+      }
+
+      .skill-title {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 0.9rem;
+        padding-left: 20px;
+        text-align: center;
+        writing-mode: tb;
+        transform: rotate(180deg);
+      }
+
+      .flex {
+        display: flex;
+
+        .divider {
+          color: plum;
+          padding-right: 3px;
+        }
+      }
+
+
+      li {
+        height: 2vh;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        color: darkslategray;
+        margin: 10px 30px 10px 0;
+        display: inline-block;
+        text-decoration: none;
+      }
     }
 
     a {
